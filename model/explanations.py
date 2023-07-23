@@ -34,14 +34,14 @@ def grad_attn(model, features) -> Tuple[np.ndarray, np.ndarray]:
 
 
 def grad_of_attn(model, features) -> Tuple[np.ndarray, np.ndarray]:
-    """ The attention values x grad(attention values) are used as an explanation (weight).
+    """ The grad(attention values) is used as an explanation (weight).
 
     :param torch.nn.Module model: The pretrained model to be explained
     :param torch.Tensor features: A tensor with shape [T, input_size], containing the video's frame features
     :return: A tuple of arrays containing the predicted importance scores and the attention values multiplied with the
              corresponding gradients, respectively
     """
-    imp_score, attn_weights, attn_grads, _ = inference(model, features, uses_gradient=True)
+    imp_score, _, attn_grads, _ = inference(model, features, uses_gradient=True)
     weights = attn_grads
 
     return imp_score, weights
@@ -64,7 +64,7 @@ def input_norm_attn(model, features) -> Tuple[np.ndarray, np.ndarray]:
 
 
 def input_norm_grad_attn(model, features) -> Tuple[np.ndarray, np.ndarray]:
-    """ The attention values x norm(attention.Value) are used as an explanation (weight).
+    """ The attention values x norm(attention.Value) x grad(attention values) are used as an explanation (weight).
 
     :param torch.nn.Module model: The pretrained model to be explained
     :param torch.Tensor features: A tensor with shape [T, input_size], containing the video's frame features

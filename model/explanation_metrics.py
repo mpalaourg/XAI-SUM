@@ -15,7 +15,7 @@ permitted_corr_methods = ["spearman", "kendall"]
 permitted_visual_masks = ["black-frame", "white-frame"]
 
 
-def sanity_violation_test(model, loader, fragments_weight, repl_method, visual_token):
+def sanity_violation_test(model, loader, fragments_weight, repl_method, visual_token) -> Dict[str, float]:
     """ Calculate the faithfulness violations, for the largest explanation weight of `fragments_weight` and the `model`
         prediction variance given a `repl_method`, for each video inside `loader`.
 
@@ -53,7 +53,7 @@ def sanity_violation_test(model, loader, fragments_weight, repl_method, visual_t
                 visual_mask = torch.load('white.pt')
             features_masked_fragm = input_msk(frame_features, [fragment], token=visual_mask)
             prediction, _, _, _ = inference(model, features_masked_fragm)
-        else:   # repl_method == "random"
+        else:
             features_random_fragm = random_replace(frame_features, [fragment], size=512)
             prediction, _, _, _ = inference(model, features_random_fragm)
 
@@ -121,10 +121,9 @@ def rank_correlation(model, loader, fragments_weight, repl_method, visual_token,
                 fragments_comprehension.append(comp)
             elif repl_method == "input-mask":
                 base_score = baseline.copy()
-                if visual_token == 'black-frame':
-                    visual_mask = torch.load('black.pt')
-                elif visual_token == 'white-frame':
-                    visual_mask = torch.load('white.pt')
+                if visual_token == 'black-frame':   visual_mask = torch.load('black.pt')
+                elif visual_token == 'white-frame': visual_mask = torch.load('white.pt')
+
                 features_masked_fragm = input_msk(frame_features, [fragment], token=visual_mask)
                 score_masked_fragm, _, _, _ = inference(model, features_masked_fragm)
 

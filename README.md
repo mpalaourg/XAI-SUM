@@ -1,6 +1,6 @@
 # Explaining Video Summarization Based on the Focus of Attention
 
-## PyTorch Implementation of our Attention-based Method for Explainable Video Summarization
+## PyTorch Implementation of our Attention-based Method for Explainable Video Summarization [[Paper](https://mpalaourg.me/en/media/files/ism2022_preprint.pdf)] [[DOI](https://doi.org/10.1109/ISM55400.2022.00029)] [[Cite](https://github.com/mpalaourg/XAI-SUM#citation)]
 - From **"Explaining Video Summarization Based on the Focus of Attention"**, Proc. of the IEEE Int. Symposium on Multimedia (ISM), Dec. 2022.
 - Written by Evlampios Apostolidis, Georgios Balaouras, Vasileios Mezaris and Ioannis Patras
 - This software can be used for studying our method for producing attention-based explanations for the outcomes of the [CA-SUM](https://github.com/e-apostolidis/CA-SUM) model for video summarization, and re-producing the reported exprerimental results in our paper. 
